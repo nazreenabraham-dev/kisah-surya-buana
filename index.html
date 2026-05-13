@@ -1,3 +1,4 @@
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -383,6 +384,106 @@
     letter-spacing: 0.05em;
   }
 
+
+  /* ORDER OPTIONS */
+  .order-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin: 24px 0 32px;
+  }
+
+  .order-card {
+    border: 1px solid rgba(201,168,76,0.2);
+    background: rgba(13,17,40,0.75);
+    padding: 24px;
+    transition: 0.3s ease;
+  }
+
+  .order-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(201,168,76,0.12);
+  }
+
+  .order-card h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold-light);
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+  }
+
+  .order-card-price {
+    font-family: 'Special Elite', monospace;
+    color: var(--gold);
+    margin-bottom: 16px;
+    letter-spacing: 0.15em;
+    font-size: 0.8rem;
+  }
+
+  .order-card p {
+    color: var(--cream-dim);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+
+  /* PHYSICAL ORDER FORM */
+  .physical-order-form {
+    background: rgba(201,168,76,0.05);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 28px;
+    margin-top: 28px;
+    text-align: left;
+  }
+
+  .physical-order-form h3 {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    color: var(--gold-light);
+    margin-bottom: 24px;
+    font-size: 1.5rem;
+  }
+
+  .form-grid {
+    display: grid;
+    gap: 16px;
+  }
+
+  .form-grid input,
+  .form-grid textarea,
+  .form-grid select {
+    width: 100%;
+    background: rgba(10,12,20,0.9);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 14px;
+    color: var(--cream);
+    font-family: 'Crimson Text', serif;
+    font-size: 1rem;
+  }
+
+  .form-grid textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  .form-grid input:focus,
+  .form-grid textarea:focus,
+  .form-grid select:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+
+  .order-total {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 1.1rem;
+    color: var(--gold-light);
+    font-family: 'Special Elite', monospace;
+    letter-spacing: 0.08em;
+  }
+
+
   /* BOMOH QUOTE */
   .bomoh-quote {
     text-align: center;
@@ -617,42 +718,107 @@
 
   <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
 
+  
   <!-- CTA -->
   <div class="cta-section">
-    <div class="price-display">
-      <div class="price-was">Physical Copy: RM35</div>
-      <div class="price-now">RM15</div>
-      <div class="price-label">Digital Edition — PDF eBook</div>
+
+    <div class="order-options">
+
+      <div class="order-card">
+        <h3>Digital Edition</h3>
+        <div class="order-card-price">RM15 · PDF eBook</div>
+        <p>
+          Instant folklore delivery for your phone, tablet, laptop,
+          train ride, mamak session, or existential crisis.
+        </p>
+
+        <button class="buy-btn" onclick="document.getElementById('buyModal').classList.add('active')">
+          Buy PDF — RM15
+        </button>
+      </div>
+
+      <div class="order-card">
+        <h3>Physical Copy</h3>
+        <div class="order-card-price">RM35 per copy</div>
+        <p>
+          Printed paperback edition of <em>Kisah Surya Buana</em>.
+          Orders collected manually before printing and postage.
+        </p>
+
+        <button class="buy-btn" onclick="document.getElementById('physicalOrder').scrollIntoView({behavior:'smooth'})">
+          Order Physical Copy
+        </button>
+      </div>
+
     </div>
 
-    <button class="buy-btn" onclick="document.getElementById('buyModal').classList.add('active')">
-      Buy Now — RM15
-    </button>
-
     <div class="payment-box">
-      <div class="payment-title">How to Get Your Copy</div>
+      <div class="payment-title">Payment Details</div>
+
       <div class="payment-step">
         <div class="step-num">1</div>
-        <div class="step-text">Transfer <strong>RM15</strong> to:</div>
+        <div class="step-text">Transfer payment to:</div>
       </div>
+
       <div class="account-detail">
         Maybank · Mohammad Nazreen Farhan<br>
         <strong>5642 7682 2346</strong>
       </div>
+
       <div class="payment-step">
         <div class="step-num">2</div>
-        <div class="step-text">Screenshot your receipt and WhatsApp it to <strong>+6013 533 8750</strong> with your name and email.</div>
+        <div class="step-text">
+          Send your receipt with your name and order details.
+        </div>
       </div>
+
       <div class="payment-step">
         <div class="step-num">3</div>
-        <div class="step-text">PDF delivered to you <strong>within 24 hours.</strong> Boleh baca dalam train.</div>
+        <div class="step-text">
+          Digital copies delivered within 24 hours.<br>
+          Physical copies processed for printing and postage.
+        </div>
       </div>
+    </div>
+
+    <div class="physical-order-form" id="physicalOrder">
+      <h3>Order Physical Copy</h3>
+
+      <div class="form-grid">
+        <input type="text" id="customerName" placeholder="Full Name" required>
+
+        <input type="email" id="customerEmail" placeholder="Email Address" required>
+
+        <input type="tel" id="customerPhone" placeholder="Phone Number / WhatsApp" required>
+
+        <select id="quantity" onchange="updateTotal()">
+          <option value="1">1 Copy</option>
+          <option value="2">2 Copies</option>
+          <option value="3">3 Copies</option>
+          <option value="4">4 Copies</option>
+          <option value="5">5 Copies</option>
+        </select>
+
+        <textarea id="customerAddress" placeholder="Delivery Address" required></textarea>
+
+        <textarea id="notes" placeholder="Additional Notes (optional)"></textarea>
+      </div>
+
+      <div class="order-total" id="orderTotal">
+        Total: RM35
+      </div>
+
+      <button class="buy-btn" style="margin-top:24px; width:100%;"
+        onclick="submitPhysicalOrder()">
+        Submit Physical Order
+      </button>
     </div>
 
     <div class="bomoh-quote">
       <p>✦ &nbsp; Ask your Bomoh if this book is good for you. &nbsp; ✦</p>
     </div>
   </div>
+
 
   <!-- FOOTER -->
   <div class="footer">
@@ -705,6 +871,54 @@ for (let i = 0; i < starCount; i++) {
   `;
   starsContainer.appendChild(star);
 }
+
+
+<script>
+function updateTotal() {
+  const quantity = parseInt(document.getElementById('quantity').value);
+  const total = quantity * 35;
+  document.getElementById('orderTotal').innerText = `Total: RM${total}`;
+}
+
+function submitPhysicalOrder() {
+  const name = document.getElementById('customerName').value.trim();
+  const email = document.getElementById('customerEmail').value.trim();
+  const phone = document.getElementById('customerPhone').value.trim();
+  const quantity = document.getElementById('quantity').value;
+  const address = document.getElementById('customerAddress').value.trim();
+  const notes = document.getElementById('notes').value.trim();
+
+  if (!name || !email || !phone || !address) {
+    alert('Please complete all required fields.');
+    return;
+  }
+
+  const total = quantity * 35;
+
+  const subject = encodeURIComponent(`Physical Book Order - ${name}`);
+
+  const body = encodeURIComponent(
+`KISAH SURYA BUANA - PHYSICAL ORDER
+
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Quantity: ${quantity}
+Total: RM${total}
+
+Delivery Address:
+${address}
+
+Additional Notes:
+${notes}
+
+Please attach payment receipt once payment has been made.`
+  );
+
+  window.location.href = `mailto:nazreen.abraham@gmail.com?subject=${subject}&body=${body}`;
+}
+</script>
+
 
 // Close modal on overlay click
 document.getElementById('buyModal').addEventListener('click', function(e) {
